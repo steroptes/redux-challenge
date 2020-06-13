@@ -1,28 +1,8 @@
-import { ADD_TASK, DELETE_TASK } from "../Constants/actions-type";
+import { ADD_TASK, DELETE_TASK, EDIT_TASK, COMPLETE_TASK } from "../Constants/actions-type";
 
 const initialState = {
   tasks: [
-    {
-      id: 0,
-      title: "Task 1",
-      description: "First Task",
-      operator: "Men 1",
-      isEdited: false,
-    },
-    {
-      id: 1,
-      title: "Task 2",
-      description: "Second Task",
-      operator: "Men 2",
-      isEdited: false,
-    },
-    {
-      id: 2,
-      title: "Task 3",
-      description: "Third Task",
-      operator: "Men 3",
-      isEdited: false,
-    },
+    
   ],
 };
 
@@ -41,6 +21,16 @@ const taskReducer = (state = initialState, { type, payload }) => {
         ...state,
         tasks:state.tasks.filter(el => el.id !== payload),
       };
+    case EDIT_TASK: return{
+      ...state,
+      tasks:state.tasks.map(el => (el.id === payload.id) ? payload : el) 
+    }
+
+    case COMPLETE_TASK: return{
+      ...state,
+      tasks:state.tasks.map(el => (el.id === payload.id)? payload : el)
+    }
+
     default:
       return state;
   }

@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { editTask } from "../js/Actions/actions";
 
 
-const ModifyingTaskBlock = ({ task, modifyTask }) => {
+
+
+const ModifyingTaskBlock = ({ task }) => {
+  const dispatch = useDispatch();
   const [ModificationTitle, setModificationTitle] = useState(task.title);
   const [ModificationOperator, setModificationOperator] = useState(
     task.operator
@@ -19,12 +24,14 @@ const ModifyingTaskBlock = ({ task, modifyTask }) => {
     setModificationDescription(e.target.value);
   const handleChangeOperator = (e) => setModificationOperator(e.target.value);
   const handleClick = () => {
-    modifyTask({
-      ...task,
-      description: ModificationDescription,
-      operator: ModificationOperator,
-      title: ModificationTitle.toUpperCase(),
-    });
+    dispatch(
+      editTask({
+        ...task,
+        description: ModificationDescription,
+        operator: ModificationOperator,
+        title: ModificationTitle.toUpperCase(),
+      })
+    );
     handleClose();
   };
 

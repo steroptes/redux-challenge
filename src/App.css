@@ -39,3 +39,7 @@
 .badge-Operator{
   font-size: medium;
 }
+.is-complete{
+  text-decoration: line-through;
+  color: gray;
+}
